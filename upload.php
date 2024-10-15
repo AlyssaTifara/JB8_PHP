@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["submit"])) {
     $targetDirectory = "uploads/";
-    $targetFile = $targetDirectory . basename($_FILES["fileToUpload"]["name"]);
+    $targetFile = $targetDirectory . basename($_FILES["documentToUpload"]["name"]);
     $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
     $allowedExtensions = array("jpg", "jpeg", "png", "gif");
