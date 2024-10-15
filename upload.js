@@ -1,17 +1,28 @@
-$(document).ready(function() {
-    $('#image-upload-form').on('submit', function(event) {
-        event.preventDefault();
+$(document).ready(function(){
+    $('#file').change(function(){
+        if (this.files.length > 0) {
+            $('#upload-button').prop('disabled', false).css('opacity', 1);
+        } else {
+            $('#upload-button').prop('disabled', true).css('opacity', 0.5);
+        }
+    });
+
+    $('#upload-form').submit(function(e){
+        e.preventDefault();
         var formData = new FormData(this);
+
         $.ajax({
-            url: 'upload.php',
             type: 'POST',
+            url: 'upload_ajax.php',
             data: formData,
+            caches: false,
             contentType: false,
-            cache: false,
             processData: false,
-            success: function(data) {
-                $('#gallery').html(data);
-                alert('Images uploaded successfully!');
+            success: function(response){
+                $('#status').html(response);
+            },
+            error: function(){
+                $('#status').html('Terjadi kesalahan saat menggunggah file.');
             }
         });
     });
