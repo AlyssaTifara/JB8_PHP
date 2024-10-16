@@ -1,5 +1,5 @@
 <?php
-$targetDirectory = "uploads/images/";
+$targetDirectory = "images/";
 
 if (!file_exists($targetDirectory)) {
     mkdir($targetDirectory, 0777, true);
@@ -11,6 +11,7 @@ if ($_FILES['images']['name'][0]) {
     for ($i=0; $i < $totalFiles; $i++) { 
         $fileName = $_FILES['images']['name'][$i];
         $targetFile = $targetDirectory . $fileName;
+        $allowedImagesTypes = array ('image/jpg', 'image/jpeg', 'image/png');
 
         if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $targetFile)) {
             echo "File $fileName berhasil diunggah.<br>";
