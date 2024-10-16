@@ -1,20 +1,12 @@
 <?php
 if (isset($_POST["submit"])) {
-    $targetDirectory = "documents/";
-    $targetFile = $targetDirectory . basename($_FILES["documentToUpload"]["name"]);
-    $documentFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-    $allowedExtensions = array("txt", "pdf", "doc", "docx");
-    $maxFileSixe = 10 * 1024 * 1024;
+    $targetDirectory = "uploads/";
+    $targetFile = $targetDirectory . basename($_FILES["fileToUpload"]["name"]);
     
-    if (in_array($documentFileType, $allowedExtensions) && $_FILES ["documentToUpload"]["size"] <= $maxFileSixe) {
-        if (move_uploaded_file($_FILES["documentToUpload"]["tmp_name"], $targetFile)) {
-            echo "Dokumen berhasil diunggah";
+        if (move_uploaded_file($_FILES["myfile"]["tmp_name"], $targetfile)) {
+            echo "File berhasil diunggah";
         } else {
-            echo "Gagal mengunggah dokumen";
+            echo "Gagal mengunggah file";
         }
-    } else {
-        echo "Jenis dokumen tidak valid atau melebihi ukuran maksimum yang diizinkan";
     }
-}
 ?>
